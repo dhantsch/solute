@@ -1,10 +1,10 @@
 package solute.hive.udf
 
-import org.apache.spark.sql.expressions.Window
-import org.apache.spark.sql.functions._
+// import org.apache.spark.sql.expressions.Window
+// import org.apache.spark.sql.functions._
 
 object HammingDistance {
-  def main(args: Array[String]) = {
+  def main(args: Array[String]): Unit = {
     // val b1 : Array[Byte] = Array(5, 7) // 0b00000101, 0b00000111
     // val b2 : Array[Byte] = Array(6, 8) // 0b00000110, 0b00001000
     // println(hammingDistance(b1, b2)) // Output: 6
@@ -12,14 +12,14 @@ object HammingDistance {
     val parents : Array[String] = Array("aaa", "abb", "aab",  "aac", "bbb")
     val value = "abc"
 
-    // println (hammingDistance(value, parents).mkString(" "))
-    // println (hammingDistance(value, parents).min)
+    println (hammingDistance(value, parents).mkString(" "))
+    println (hammingDistance(value, parents).min)
 
     println (minHammingDistance(parents).mkString(" "))
   }
 
   // Calculate a sum of set bits of XOR'ed bytes
-  def hammingDistance(b1: Array[Byte], b2: Array[Byte]) =
+  def hammingDistance(b1: Array[Byte], b2: Array[Byte]): Int =
     b1.zip(b2).map((x: (Byte, Byte)) => numberOfBitsSet((x._1 ^ x._2).toByte)).sum
 
 
@@ -41,7 +41,7 @@ object HammingDistance {
     * @param value the current value
     * @param parents all parent values
     */
-  def hammingDistance(value: String, parents: Array[String]) = {
+  def hammingDistance(value: String, parents: Array[String]): Array[Int] = {
     parents.map(x  => x.zip(value).count(c => c._1 != c._2))
   }
 
