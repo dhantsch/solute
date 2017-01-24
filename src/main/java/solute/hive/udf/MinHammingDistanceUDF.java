@@ -9,14 +9,13 @@ import org.apache.hadoop.hive.ql.udf.generic.GenericUDF;
 import org.apache.hadoop.hive.serde2.objectinspector.ListObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspector;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
-import solute.hive.udf.HammingDistance;
 
 import java.util.List;
 
 /**
- * This UDF provides a row_number() function.
+ * This UDF provides a minHammingDistance() function.
  */
-@Description(name = "minHummingDistance", value = "_FUNC_(value, partition columns ...) - Returns the humming distance of a value within a partitioned, sorted window.")
+@Description(name = "minHammingDistance", value = "_FUNC_(value, partition columns ...) - Returns the humming distance of a value within a partitioned, sorted window.")
 @UDFType(deterministic = false, stateful = true)
 public class MinHammingDistanceUDF extends GenericUDF {
 
@@ -30,7 +29,7 @@ public class MinHammingDistanceUDF extends GenericUDF {
 
     @Override
     public String getDisplayString(String[] currentKey) {
-        return "solute.hive.udf.MinHammingDistanceUDF Distance";
+        return "minHammingDistance";
     }
 
     @Override
