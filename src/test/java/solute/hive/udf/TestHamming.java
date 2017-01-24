@@ -1,8 +1,4 @@
-import org.apache.avro.generic.GenericData;
-import solute.hive.udf.HammingDistance;
-
-import java.util.ArrayList;
-import java.util.List;
+package solute.hive.udf;
 
 /**
  * Created by hah on 24.01.17.
