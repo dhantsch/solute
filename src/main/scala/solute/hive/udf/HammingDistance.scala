@@ -15,7 +15,7 @@ object HammingDistance {
     println (hammingDistance(value, parents).mkString(" "))
     println (hammingDistance(value, parents).min)
 
-    println (minHammingDistance(parents).mkString(" "))
+    println ("min " + minHammingDistance(parents))
   }
 
   // Calculate a sum of set bits of XOR'ed bytes
@@ -51,7 +51,7 @@ object HammingDistance {
     * @param values the collection of strings
     * @return the haming distances for every items in the collection
     */
-  def minHammingDistance(values: Array[String]) : Array[Int] = {
+  def minHammingDistance(values: Array[String]) : Int = {
     val result = new Array[Int](values.length)
     val indexed = values.zipWithIndex
 
@@ -64,7 +64,8 @@ object HammingDistance {
         result(x._2) = hammingDistance(x._1, ax).min
       }
     }
+    println (result.mkString(" "))
 
-    result
+    result.filter(_ >= 0 ).min
   }
 }
