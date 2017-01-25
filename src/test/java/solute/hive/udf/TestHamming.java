@@ -9,6 +9,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectIn
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -42,12 +43,7 @@ public class TestHamming {
         JavaIntObjectInspector resultInspector = (JavaIntObjectInspector) udf.initialize(new ObjectInspector[]{listOI});
 
         // create the actual UDF arguments
-        List<String> list = new ArrayList<>();
-        list.add("aaa");
-        list.add("abb");
-        list.add("aab");
-        list.add("aac");
-        list.add("bbb");
+        List<String> list = Arrays.asList("aaa", "abb", "aab",  "aac", "bbb");
 
         // the value exists
         Object result = udf.evaluate(new GenericUDF.DeferredObject[]{new GenericUDF.DeferredJavaObject(list)});
