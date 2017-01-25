@@ -94,6 +94,24 @@
         </dependency>
 
         <dependency>
+            <artifactId>tez-dag</artifactId>
+            <groupId>org.apache.tez</groupId>
+            <version>${tez.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>tez-common</artifactId>
+            <groupId>org.apache.tez</groupId>
+            <version>${tez.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>tez-mapreduce</artifactId>
+            <groupId>org.apache.tez</groupId>
+            <version>${tez.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.3.1</version>

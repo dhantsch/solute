@@ -5,6 +5,7 @@ import com.klarna.hiverunner.HiveShell;
 import com.klarna.hiverunner.annotations.HiveSQL;
 import com.klarna.hiverunner.annotations.HiveSetupScript;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -25,7 +26,7 @@ public class UserDefinedFunctionTest {
                     "  )" +
                     "  ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'" +
                     "  STORED AS TEXTFILE" +
-                    "  LOCATION '" + hdfsSource + "' ";
+                    "  LOCATION '" + hdfsSource + "' ;";
 
     @HiveSQL(files = {}, autoStart = false)
     public HiveShell hiveShell;
@@ -51,5 +52,13 @@ public class UserDefinedFunctionTest {
         List<String> expected = Arrays.asList("123");
         List<String> actual = hiveShell.executeQuery("SELECT regexp_extract(value, '([0-9]*)[A-Z]*', 1) FROM udf_test");
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    @Ignore
+    public void hammingDistance() {
+        hiveShell.addResource(hdfsSource + "/data.csv","1\t123ABC");
+        hiveShell.addSetupScript("CREATE FUNCTION hdist as 'solute.hive.udf.MinHammingDistanceUDF'");
+        hiveShell.start();
     }
 }
