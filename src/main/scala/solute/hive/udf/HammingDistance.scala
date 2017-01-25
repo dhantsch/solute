@@ -4,19 +4,6 @@ package solute.hive.udf
 // import org.apache.spark.sql.functions._
 
 object HammingDistance {
-  def main(args: Array[String]): Unit = {
-    // val b1 : Array[Byte] = Array(5, 7) // 0b00000101, 0b00000111
-    // val b2 : Array[Byte] = Array(6, 8) // 0b00000110, 0b00001000
-    // println(hammingDistance(b1, b2)) // Output: 6
-
-    val parents : Array[String] = Array("aaa", "abb", "aab",  "aac", "bbb")
-    val value = "abc"
-
-    println (hammingDistance(value, parents).mkString(" "))
-    println (hammingDistance(value, parents).min)
-
-    println ("min " + minHammingDistance(parents))
-  }
 
   // Calculate a sum of set bits of XOR'ed bytes
   def hammingDistance(b1: Array[Byte], b2: Array[Byte]): Int =
@@ -64,7 +51,7 @@ object HammingDistance {
         result(x._2) = hammingDistance(x._1, ax).min
       }
     }
-    println (result.mkString(" "))
+    // println (result.mkString(" "))
 
     result.filter(_ >= 0 ).min
   }
