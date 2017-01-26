@@ -1,11 +1,10 @@
 package solute.hive.udf;
 
-import com.klarna.hiverunner.StandaloneHiveRunner;
 import com.klarna.hiverunner.HiveShell;
+import com.klarna.hiverunner.StandaloneHiveRunner;
 import com.klarna.hiverunner.annotations.HiveSQL;
 import com.klarna.hiverunner.annotations.HiveSetupScript;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -54,11 +53,12 @@ public class UserDefinedFunctionTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    @Ignore
-    public void hammingDistance() {
+    @Test (expected = IllegalArgumentException.class)
+    public void hammingDistanceSemanticFails() {
         hiveShell.addResource(hdfsSource + "/data.csv","1\t123ABC");
-        hiveShell.addSetupScript("CREATE FUNCTION hdist as 'solute.hive.udf.MinHammingDistanceUDF'");
         hiveShell.start();
+        hiveShell.execute("create temporary function hdist as 'solute.hive.udf.MinHammingDistanceUDF'");
+        hiveShell.executeQuery("select hdist(value) from udf_test");
+        // hiveShell.executeQuery("select id, hdist(value) over (partition by id) from udf_test");
     }
 }
